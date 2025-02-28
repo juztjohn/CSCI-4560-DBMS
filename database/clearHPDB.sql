@@ -1,5 +1,5 @@
 -- ClearDB.sql file
--- clears the three relations
+-- clears the relations
 
 -- set use correctly
 USE healthPortalDB;
