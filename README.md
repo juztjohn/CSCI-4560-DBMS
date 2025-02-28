@@ -7,3 +7,6 @@ Users will be given appropriate credentials to access and manipulate the patient
  - Front End: Elaina Vogel
  - Back End: Jaron McCutcheon
  - Tester/Merger: John Byrd
+
+Our application will be written using a combination of django, MySQL, C#, and javascript.
+The intent of this application is to ease the process of viewing and editing Medical Records for both the patient and medical faculty.
