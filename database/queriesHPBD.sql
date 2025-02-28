@@ -1,3 +1,5 @@
+-- queriesHPDB.sql contains the queries for the db
+
 -- user database
 USE healthPortalDB;
 
