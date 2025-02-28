@@ -1,3 +1,5 @@
+-- loadHPDB.sql load the database with the initial data
+
 -- Use the correct database
 USE healthPortalDB;
 
