@@ -1,5 +1,6 @@
 -- CreateDB.sql file
--- creates the three relations supplier, part, and shipment
+-- creates the relations
+
 -- Create the database
 CREATE DATABASE IF NOT EXISTS healthPortalDB;
 
