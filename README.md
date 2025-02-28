@@ -10,3 +10,5 @@ Users will be given appropriate credentials to access and manipulate the patient
 
 Our application will be written using a combination of django, MySQL, C#, and javascript.
 The intent of this application is to ease the process of viewing and editing Medical Records for both the patient and medical faculty.
+
+Github Link - https://github.com/juztjohn/CSCI-4560-DBMS
