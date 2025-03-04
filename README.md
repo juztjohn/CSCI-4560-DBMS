@@ -1,14 +1,24 @@
 # CSCI-4560-DBMS
-Semester Project for Database Management Systems
+[Github Repository](https://github.com/juztjohn/CSCI-4560-DBMS)
 
-We want to create a web-based health care portal that keeps patient records. 
-Users will be given appropriate credentials to access and manipulate the patients information.
+We will be creating a fully functional healthcare portal that allows patients and staff to access relevant information. Security and availability will be our main focuses of this project, as a real healthcare portal must be HIPAA compliant and highly available. 
 
- - Front End: Elaina Vogel
- - Back End: Jaron McCutcheon
- - Tester/Merger: John Byrd
+We will be implementing security best practices such as role-based access and password hashing using the SHA256 algorithm and ensuring that the website and database is not prone to crashes or errors that may disrupt the user experience.
+# Team
+**Elaina Vogel** 
+- Frontend Development
 
-Our application will be written using a combination of django, MySQL, C#, and javascript.
-The intent of this application is to ease the process of viewing and editing Medical Records for both the patient and medical faculty.
+**Jaron McCutcheon**
+- Backend Development
 
-Github Link - https://github.com/juztjohn/CSCI-4560-DBMS
+**John Byrd**
+- Merging/Testing
+- Additional Frontend/Backend Development
+# Technology Used
+<div>
+  <img src="https://github.com/devicons/devicon/blob/master/icons/django/django-plain-wordmark.svg" title="Django" alt="Django" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MySQL" alt="MySQL" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original-wordmark.svg" title="Python" alt="Python" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/csharp/csharp-original.svg" title="C#" alt="C#" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+</div>
