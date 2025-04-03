@@ -3,40 +3,32 @@
 -- Use the correct database
 USE healthPortalDB;
 
--- Insert Users
-INSERT INTO USER_ACCOUNTS (User_id, User_name, User_phone, User_email) VALUES
-('P00000001', 'Alice Johnson', '555-123-4567', 'alice@example.com'),
-('P00000002', 'Bob Smith', '555-234-5678', 'bob@example.com'),
-('P00000003', 'Charlie Brown', '555-345-6789', 'charlie@example.com'),
-('P00000004', 'Diana Prince', '555-456-7890', 'diana@example.com'),
-('P00000005', 'Ethan Hunt', '555-567-8901', 'ethan@example.com');
+-- Insert User Accounts (starting at ID 100)
+INSERT INTO USER_ACCOUNTS (Status, User_name, User_phone, User_email, Password, DOB) VALUES
+('Patient', 'John Doe', '123-456-7890', 'johndoe@example.com', 'Pass1234', '01/01/2000'),
+('Patient', 'Jane Smith', '987-654-3210', 'janesmith@example.com', 'Secure456', '03/01/2003'),
+('Patient', 'Alice Brown', '555-555-5555', 'alicebrown@example.com', 'Alice789', '05/01/2007'),
+('Doctor', 'Dr. Emily White', '111-222-3333', 'drwhite@example.com', 'DrWhite99', '07/01/1990'),
+('Doctor', 'Dr. Robert Black', '222-333-4444', 'drblack@example.com', 'BlackDoc12', '09/01/1980');
 
--- Insert Patients
+-- Insert Medical Records (Using corresponding User IDs)
 INSERT INTO RECORDS (Patient_id, Patient_name, Diagnosis, Treatment_notes, Prescription, Blood_type) VALUES
-('P00000001', 'Alice Johnson', 'Flu', 'Rest and hydration', 'Tamiflu', 'O+'),
-('P00000002', 'Bob Smith', 'Diabetes', 'Monitor blood sugar', 'Insulin', 'A-'),
-('P00000003', 'Charlie Brown', 'Hypertension', 'Reduce salt intake', 'Lisinopril', 'B+'),
-('P00000004', 'Diana Prince', 'Asthma', 'Use inhaler as needed', 'Albuterol', 'AB-'),
-('P00000005', 'Ethan Hunt', 'Migraine', 'Avoid bright lights', 'Sumatriptan', 'O-');
+(100, 'John Doe', 'Flu', 'Rest and hydration', 'Tamiflu', 'O+'),
+(101, 'Jane Smith', 'Hypertension', 'Monitor blood pressure', 'Lisinopril', 'A-'),
+(102, 'Alice Brown', 'Diabetes', 'Maintain diet and exercise', 'Metformin', 'B+');
 
--- Insert Doctors
+-- Insert Doctors (Using corresponding User IDs)
 INSERT INTO DOCTOR (Dr_id, Dr_name, Dr_phone, Dr_email, Facility_addr) VALUES
-('D00000001', 'Dr. John Doe', '555-111-2222', 'dr.johndoe@example.com', '123 Health St'),
-('D00000002', 'Dr. Emily White', '555-222-3333', 'dr.emily@example.com', '456 Care Ave'),
-('D00000003', 'Dr. Mike Green', '555-333-4444', 'dr.mike@example.com', '789 Wellness Blvd');
+(103, 'Dr. Emily White', '111-222-3333', 'drwhite@example.com', 'City Hospital'),
+(104, 'Dr. Robert Black', '222-333-4444', 'drblack@example.com', 'Downtown Clinic');
 
--- Insert Appointments
+-- Insert Appointments (Ensure Patients and Doctors Exist)
 INSERT INTO APPOINTMENTS (Patient_id, Dr_id, Date, Time, Appt_type, Facility_addr) VALUES
-('P00000001', 'D00000001', '2025-03-01', '09:00:00', 'General Checkup', '123 Health St'),
-('P00000002', 'D00000002', '2025-03-02', '10:30:00', 'Diabetes Consultation', '456 Care Ave'),
-('P00000003', 'D00000003', '2025-03-03', '14:00:00', 'Blood Pressure Check', '789 Wellness Blvd'),
-('P00000004', 'D00000001', '2025-03-04', '15:45:00', 'Asthma Follow-up', '123 Health St'),
-('P00000005', 'D00000002', '2025-03-05', '08:15:00', 'Migraine Treatment', '456 Care Ave');
+(100, 103, '2025-04-10', '10:00 AM', 'General Checkup', 'City Hospital'),
+(101, 104, '2025-04-12', '02:00 PM', 'Follow-up', 'Downtown Clinic');
 
--- Insert Billing Records
+-- Insert Billing Information
 INSERT INTO BILLING (User_id, Amount, Insurance, Payment_status) VALUES
-('P00000001', 200.50, 'BlueCross', TRUE),
-('P00000002', 150.75, 'Aetna', FALSE),
-('P00000003', 300.00, 'UnitedHealth', TRUE),
-('P00000004', 400.25, 'Medicare', TRUE),
-('P00000005', 100.00, 'Cigna', FALSE);
+(100, 150.00, 'BlueShield', TRUE),
+(101, 200.00, 'Medicare', FALSE),
+(102, 100.00, 'Private', TRUE);
