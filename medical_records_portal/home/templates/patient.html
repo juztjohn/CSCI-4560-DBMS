@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #025843;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .container {
+            margin-top: 80px; /* Prevents overlap with fixed header */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+
+        .box {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            background-color: #a7a7a7;
+        }
+
+        .full-width {
+            grid-column: span 2; /* Makes Message Doctor full width */
+        }
+    </style>
+</head>
+<body>
+
+    <header>John Doe</header> <!-- Replace with actual patient name -->
+
+    <div class="container">
+        <div class="grid">
+            <div class="box">Appointments</div>
+            <div class="box">Labs</div>
+            <div class="box">Billing</div>
+            <div class="box">Update Info</div>
+            <div class="box full-width">Message Doctor</div>
+        </div>
+    </div>
+
+</body>
+</html>
