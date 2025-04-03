@@ -20,7 +20,6 @@ We will be implementing security best practices such as role-based access and pa
   <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MySQL" alt="MySQL" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original-wordmark.svg" title="Python" alt="Python" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="html" alt="C#" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
 </div>
 
 # Setup the UI
@@ -36,4 +35,4 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 6. Open a browser and enter "http:127.0.0.1:8000/home" as the url to view the login page
-7. Enter "http:127.0.0.1:8000/patient" as the url to view the patien view page
+7. Enter "http:127.0.0.1:8000/patient" as the url to view the patient view page
