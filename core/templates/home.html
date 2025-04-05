@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +8,21 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1>Welcome to the Healthcare Portal</h1>
+    <!-- Header section -->
+    <header>
+        Welcome to the Healthcare Portal
+    </header>
 
-    <p><a href="{% url 'patient_signup' %}">Click here to sign up</a></p>
-
-    <!-- Link to the login screen -->
-    <p><a href="{% url 'login' %}">Login</a></p>
+    <!--login container-->
+    <div class="login-container">
+        <h2>Please Select One Option</h2>
+        
+            <div class="button-group">
+                <button type="button" class="signup-btn"><a href="{% url 'patient_signup' %}">Sign Up</a></button>                
+                <button type="submit" class="login-btn"><a href="{% url 'login' %}">Login</a></button>
+            </div>
+        </form>
+  
+    </div>
 </body>
 </html>
