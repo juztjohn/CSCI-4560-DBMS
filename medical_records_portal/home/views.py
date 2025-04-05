@@ -10,3 +10,7 @@ def home(request):
 def patient(request):
     template = loader.get_template('patient.html')
     return HttpResponse(template.render())
+
+def appointments_view(request):
+    template = loader.get_template('appointments.html')
+    return HttpResponse(template.render())
