@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Sign Up</title>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        Patient Sign Up
+    </header>
+
+    <!-- Signup container-->
+    <div class="signup-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+    <!-- You can add a link back to home or login if desired -->
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</body>
+</html>
+
