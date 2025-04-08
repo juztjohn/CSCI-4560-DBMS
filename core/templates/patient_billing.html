@@ -1,0 +1,55 @@
+<!--TODO: change list to selection list so user can pay unpaid bills-->
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+<!-- templates/appointments/appointments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing</title>
+</head>
+
+<body class="dash-body">
+    <header>Billing</header>
+    <div class="appt-box">
+        <div class="centered-text"><b>Review your bills here.</b></div><br><br>
+        <div class="header">
+            <div class="header-item">Amount Due</div>
+            <div class="header-item">Payment Status</div>
+            <div class="header-item">Insurance</div>
+        </div>
+        <!--Add appts vars here-->
+        <div class="scrollable-list">
+            <!-- example -->
+            <div class="list-item">
+                <div class="item-column">$amt</div>
+                <div class="item-column">status</div>
+                <div class="item-column">insurance</div>
+            </div>
+            <div class="list-item">
+                <div class="item-column">$amt</div>
+                <div class="item-column">status</div>
+                <div class="item-column">insurance</div>
+            </div>
+        
+        <!-- Once we have data to pull from (UPDATE MODELS.PY AND VIEWS.PY)-->
+        <!--
+            {% for appointment in appointments %}
+            <div class="list-item">
+                <div class="item-column">{{ billing.amt }}</div>
+                <div class="item-column">{{ billing.status }}</div>
+                <div class="item-column">{{ billing.insurance }}</div>
+            </div>
+            {% empty %}
+            <div class="list-item">No appointments available</div>
+            {% endfor %} 
+        -->
+        </div>
+    </div>
+    <br><a href="/dashboard">← Back to Dashboard</a>
+</body>
+</html>
