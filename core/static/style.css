@@ -125,7 +125,7 @@ body {
 }
     */
 
-.dash-body {
+.dash-body { /* appts uses same*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,16 +133,6 @@ body {
     height: 100vh;
     background-color: #025843;
     padding: 20px;
-}
-
-.container {
-    margin-top: 80px;
-    /* Prevents overlap with fixed header */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
 }
 
 .grid {
@@ -173,3 +163,88 @@ body {
     grid-column: span 2;
     /* Makes Message Doctor full width */
 }
+
+/* Appointments_list */
+/*
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+*/
+
+    .container {
+        margin-top: 80px; /* Prevents overlap with fixed header */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .appt-box {
+        background-color: white;
+        padding: 30px;
+        text-align: left;
+        font-size: 18px;
+        font-weight: normal;
+        color: #333;
+        border-radius: 2px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: 0.3s;
+
+        width: 80vw;   /* 80% of the viewport width */
+        height: 70vh;  /* 70% of the viewport height */
+    
+        display: flex;
+        flex-direction: column;  /* Stack the header and list */
+        overflow: hidden; /* Prevents content overflow outside the box */
+
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between; /* Distribute the titles evenly */
+        font-weight: bold;
+        font-size: 16px;  /* Adjust size relative to container */
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .header-item {
+        flex: 1; /* Make each item take equal width */
+        text-align: center;
+    }
+
+    .centered-text {
+        text-align: center;  /* Center the bolded text */
+    }
+
+    .scrollable-list {
+        width: 100%;           /* Set the width of the list */
+        height: 75%;          /* Set the height of the list */
+        overflow-y: auto;       /* Enable vertical scrolling */
+        user-select: none;      /* Prevent text selection */
+        border: 1px solid #ccc; /* Optional: Adds a border around the list */
+        padding: 10px;          /* Optional: Adds padding inside the list */
+    }
+
+    .scrollable-list div {
+        padding: 5px;           /* Optional: Adds padding for the items */
+        border-bottom: 1px solid #eee; /* Optional: Adds a border between items */
+    }
+
+    .list-item {
+        display: flex;          /* Use flexbox to arrange columns */
+        width: 100%;            /* Makes the item take up full width */
+        padding: 5px 0;         /* Optional: Adds vertical padding between items */
+    }
+
+    .item-column {
+        flex: 1;                /* Distributes columns equally across each item */
+        text-align: center;     /* Centers the content in each column */
+        padding: 5px;           /* Adds padding inside each column */
+        border-bottom: 1px solid #eee; /* Optional: Adds a border between columns */
+    }
