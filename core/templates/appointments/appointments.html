@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- head content as before -->
     <title>Appointments</title>
 </head>
+
 <style>
     * {
         box-sizing: border-box;
@@ -121,12 +121,13 @@
         padding: 5px;           /* Adds padding inside each column */
         border-bottom: 1px solid #eee; /* Optional: Adds a border between columns */
     }
+    </style>
 
-</style>
 <body>
     <header>Your Appointments</header>
     <div class="box">
-        <div class="centered-text"><b>Review your appointments here.</b></div><br><br>
+        <div class="centered-text"><b>Review your appointments here.</b></div>
+        <br><br>
         <div class="header">
             <div class="header-item">Doctor</div>
             <div class="header-item">Facility</div>
@@ -134,81 +135,22 @@
             <div class="header-item">Date</div>
             <div class="header-item">Time</div>
         </div>
-        <!--Add appts vars here-->
         <div class="scrollable-list">
-            <!-- example -->
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-            <div class="list-item">
-                <div class="item-column">docname</div>
-                <div class="item-column">address</div>
-                <div class="item-column">checkup</div>
-                <div class="item-column">01/01/2020</div>
-                <div class="item-column">10:00</div>
-            </div>
-        
-        <!-- Once we have data to pull from (UPDATE MODELS.PY AND VIEWS.PY)-->
-        <!--
             {% for appointment in appointments %}
             <div class="list-item">
-                <div class="item-column">{{ appointment.doctor }}</div>
-                <div class="item-column">{{ appointment.address }}</div>
-                <div class="item-column">{{ appointment.type }}</div>
+                <!-- Adjust these as necessary based on your model relationships -->
+                <div class="item-column">{{ appointment.doctor.user.get_full_name }}</div>
+                <div class="item-column">{{ appointment.facility }}</div>
+                <div class="item-column">{{ appointment.appointment_type }}</div>
                 <div class="item-column">{{ appointment.date }}</div>
                 <div class="item-column">{{ appointment.time }}</div>
             </div>
             {% empty %}
             <div class="list-item">No appointments available</div>
-            {% endfor %} 
-        -->
+            {% endfor %}
         </div>
+        <!-- Link to create an appointment -->
+            <p><a href="{% url 'create_appointment' %}">Create a new appointment</a></p>
     </div>
     <br><a href="/patient">← Back to Dashboard</a>
 </body>

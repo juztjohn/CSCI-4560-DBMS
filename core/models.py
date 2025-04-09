@@ -23,7 +23,9 @@ class Doctor(models.Model):
 
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    facility = models.CharField(max_length=100)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    appointment_type = models.CharField(max_length=50)
     date_time = models.DateTimeField(default=timezone.now)  # now as default
     notes = models.TextField(blank=True)
 

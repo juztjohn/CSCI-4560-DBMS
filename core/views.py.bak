@@ -1,4 +1,4 @@
-# core/views.py
+# Create your views.
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -9,16 +9,15 @@ from .forms import PatientSignUpForm, AppointmentForm
 def home(request):
     return render(request, 'home.html')
 
-@login_required
+@login_required  # ensures only authenticated users access this view
 def appointments(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')
-    # Retrieve appointments for the patient
-    appts = Appointment.objects.filter(patient=patient)
-    return render(request, 'appointments/appointments.html', {'appointments': appts})
+        return redirect('patient_registration')  # Replace with the appropriate URL
+    appointments = Appointment.objects.filter(patient=patient)
+    return render(request, 'appointments.html', {'appointments': appointments})
 
 def patient_registration(request):
     return render(request, 'patient_registration.html')
@@ -39,10 +38,12 @@ def patient_dashboard(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         return redirect('patient_registration')
-    appts = Appointment.objects.filter(patient=patient)
+
+    appointments = Appointment.objects.filter(patient=patient)
+
     context = {
         'patient': patient,
-        'appointments': appts,
+        'appointments': appointments,
     }
     return render(request, 'patient_dashboard.html', context)
 
@@ -50,13 +51,17 @@ def patient_dashboard(request):
 def dashboard(request):
     user = request.user
     context = {}
+
+    # Check if the user is a superuser (admin)
     if user.is_superuser:
         context['role'] = 'admin'
+        # Optionally, add admin-specific context data
     elif hasattr(user, 'doctor'):
         context['doctor_appointments'] = Appointment.objects.filter(doctor=user.doctor)
         context['role'] = 'doctor'
     elif hasattr(user, 'receptionist'):
         context['role'] = 'receptionist'
+        # Fetch receptionist-specific data here
     elif hasattr(user, 'patient'):
         context['role'] = 'patient'
         patient = user.patient
@@ -64,16 +69,35 @@ def dashboard(request):
         context['appointments'] = Appointment.objects.filter(patient=patient)
     else:
         context['role'] = 'unknown'
+
     return render(request, 'dashboard.html', context)
+
+@login_required
+def appointments(request):
+    try:
+        patient = request.user.patient  # Assuming a one-to-one relation exists
+        appointments = Appointment.objects.filter(patient=patient)
+    except Exception:
+        appointments = Appointment.objects.none()
+    return render(request, 'appointments/appointments.html', {'appointments': appointments})
+
+@login_required
+# core/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Appointment
 
 @login_required
 def doctor_appointments(request):
     try:
-        doctor = request.user.doctor
-        appts = Appointment.objects.filter(doctor=doctor)
+        doctor = request.user.doctor  
+        appointments = Appointment.objects.filter(doctor=doctor)
     except AttributeError:
-        appts = Appointment.objects.none()
-    return render(request, 'doctor/doctor_appointments.html', {'appointments': appts})
+        # If the logged-in user is not a doctor, you can choose to redirect them elsewhere
+        appointments = Appointment.objects.none()
+        # Optionally, you can also send an error message:
+        # messages.error(request, "You do not have a doctor profile.")
+    return render(request, 'appointments/doctor_appointments.html', {'appointments': appointments})
 
 @login_required
 def create_appointment(request):
@@ -81,9 +105,10 @@ def create_appointment(request):
         form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment = form.save(commit=False)
-            appointment.patient = request.user.patient
+            # Set the patient field to the current user’s patient record.
+            appointment.patient = request.user.patient  
             appointment.save()
-            return redirect('appointments')
+            return redirect('appointments')  # Redirect to the list of appointments
     else:
         form = AppointmentForm()
     return render(request, 'appointments/create_appointment.html', {'form': form})

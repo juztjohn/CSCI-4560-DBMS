@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Patient
+from .models import Patient, Appointment
 
 class PatientSignUpForm(UserCreationForm):
     phone = forms.CharField(max_length=20, required=True)
@@ -20,3 +20,13 @@ class PatientSignUpForm(UserCreationForm):
             # Create the Patient profile. Note: if phone is unique, ensure the data is valid.
             Patient.objects.create(user=user, phone=self.cleaned_data.get('phone'))
         return user
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['patient', 'facility', 'doctor', 'appointment_type', 'date_time', 'notes']
+        # Optionally add widgets or labels:
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'time': forms.TimeInput(attrs={'type': 'time'}),
+        }
