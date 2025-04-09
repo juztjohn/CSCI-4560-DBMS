@@ -73,3 +73,12 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
+@login_required  # ensures only authenticated users access this view
+def patient_billing(request):
+    try:
+        patient = request.user.patient
+    except Patient.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration')  # Replace with the appropriate URL
+    return render(request, 'patient_billing.html')
+
