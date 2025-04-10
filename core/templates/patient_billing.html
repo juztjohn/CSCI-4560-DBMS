@@ -1,12 +1,12 @@
-<!--TODO: change list to selection list so user can pay unpaid bills-->
+<!--Select bill to pay on other page -->
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
 
 
-<!-- templates/appointments/appointments.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +35,9 @@
                 <div class="item-column">status</div>
                 <div class="item-column">insurance</div>
             </div>
-        
-        <!-- Once we have data to pull from (UPDATE MODELS.PY AND VIEWS.PY)-->
-        <!--
+
+            <!-- Once we have data to pull from (UPDATE MODELS.PY AND VIEWS.PY)-->
+            <!--
             {% for appointment in appointments %}
             <div class="list-item">
                 <div class="item-column">{{ billing.amt }}</div>
@@ -49,7 +49,21 @@
             {% endfor %} 
         -->
         </div>
+        <div class="box" style="color: #a7a7a7"><a href="{% url 'pay_bill' %}">Pay Selected Bill</a></div>
     </div>
     <br><a href="/dashboard">← Back to Dashboard</a>
+
+    <!-- not sure if this works but should make it scrollable -->
+    <script>
+        const items = document.querySelectorAll('.list-item');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                items.forEach(i => i.classList.remove('selected')); // only one selected
+                item.classList.add('selected');
+            });
+        });
+    </script>
+
 </body>
+
 </html>

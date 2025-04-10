@@ -82,3 +82,11 @@ def patient_billing(request):
         return redirect('patient_registration')  # Replace with the appropriate URL
     return render(request, 'patient_billing.html')
 
+@login_required  # ensures only authenticated users access this view
+def pay_bill(request):
+    try:
+        patient = request.user.patient
+    except Patient.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration')  # Replace with the appropriate URL
+    return render(request, 'pay_bill.html')
