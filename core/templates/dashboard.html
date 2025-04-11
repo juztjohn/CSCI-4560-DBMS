@@ -25,7 +25,7 @@
     
     {% elif role == 'patient' %}
       <h2>Patient Dashboard</h2>
-      <p>Welcome, {{ patient.user.get_full_name }}</p>
+      <p class="p-control">Welcome, {{ patient.user.get_full_name }}</p>
       <h3>Your Appointments</h3>
       {% if appointments %}
         <ul>
@@ -34,20 +34,12 @@
           {% endfor %}:
         </ul>
       {% else %}
-        <p>You have no appointments scheduled.</p>
+        <p class="p-control">You have no appointments scheduled.</p>
       {% endif %}
     
     {% else %}
       <p>Your role is not defined. Please contact support.</p>
     {% endif %}
-
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}</style>
 
 <body class="dash-body">
 
