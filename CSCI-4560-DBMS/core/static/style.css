@@ -1,0 +1,318 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+    background-color: #025843;
+
+    margin: 0;
+    display: block;
+
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    margin-top: 25vh;
+
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.input-group input {
+    width: 94%;
+    padding: 8px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    /* Adds space between buttons */
+    gap: 10px;
+    /* Adjusts spacing between buttons */
+}
+
+.button-group button {
+    flex: 1;
+    /* Makes both buttons take equal width */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.login-btn:hover {
+    background-color: #45a049;
+}
+
+.signup-btn {
+    background-color: #007BFF;
+    /* Different color for distinction */
+    color: white;
+}
+
+.signup-btn:hover {
+    background-color: #0069d9;
+}
+
+.forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.forgot-password a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.signup-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80vw;
+    height: 70vh;
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* dashboard */
+
+.dash-body {
+    /* appts uses same*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #025843;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.box {
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.box:hover {
+    background-color: #a7a7a7;
+}
+
+.full-width {
+    grid-column: span 2;
+    /* Makes Message Doctor full width */
+}
+
+.container {
+    margin-top: 80px;
+    /* Prevents overlap with fixed header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.appt-box {
+    background-color: white;
+    padding: 30px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: normal;
+    color: #333;
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+
+    width: 80vw;
+    /* 80% of the viewport width */
+    height: 70vh;
+    /* 70% of the viewport height */
+
+    display: flex;
+    flex-direction: column;
+    /* Stack the header and list */
+    overflow: hidden;
+    /* Prevents content overflow outside the box */
+
+}
+
+.appt-box.bill {
+    height: 70%;
+    width: 50%;
+    margin-top: 25vh;
+}
+
+
+.item-header {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    color: #333;
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-item {
+    flex: 1;
+    /* Make each item take equal width */
+    text-align: center;
+}
+
+.centered-text {
+    text-align: center;
+    /* Center the bolded text */
+}
+
+.scrollable-list {
+    width: 100%;
+    /* Set the width of the list */
+    height: 75%;
+    /* Set the height of the list */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    user-select: none;
+    /* Prevent text selection */
+    border: 1px solid #ccc;
+    /* Optional: Adds a border around the list */
+    padding: 10px;
+    /* Optional: Adds padding inside the list */
+}
+
+.scrollable-list div {
+    padding: 5px;
+    /* Optional: Adds padding for the items */
+    border-bottom: 1px solid #eee;
+    /* Optional: Adds a border between items */
+}
+
+.list-item {
+    display: flex;
+    /* Use flexbox to arrange columns */
+    width: 100%;
+    /* Makes the item take up full width */
+    padding: 5px 0;
+    /* Optional: Adds vertical padding between items */
+}
+
+.item-column {
+    flex: 1;
+    /* Distributes columns equally across each item */
+    text-align: center;
+    /* Centers the content in each column */
+    padding: 5px;
+    /* Adds padding inside each column */
+    border-bottom: 1px solid #eee;
+    /* Optional: Adds a border between columns */
+}
+
+/*billing*/
+
+.list-item:hover {
+    background-color: #eee;
+}
+
+.list-item.selected {
+    background-color: #bde4ff;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* full viewport height */
+}
+
+.pay-btn {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 0px;
+    height: 50px;
+    width: 100px;
+}
+
+/* Appt body styling */
+
+.appt-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.p-control {
+    margin: 0;
+}

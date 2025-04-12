@@ -1,0 +1,58 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+<!-- core/templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    
+    {% if role == 'admin' %}
+      <h2>Admin Panel</h2>
+      <!-- Admin specific content goes here -->
+    
+    {% elif role == 'doctor' %}
+      <h2>Doctor Dashboard</h2>
+      <!-- Show doctor-specific details, for example a list of appointments -->
+      <a href="{% url 'doctor_appointments' %}">View Your Appointments</a>   
+
+    {% elif role == 'receptionist' %}
+      <h2>Receptionist Dashboard</h2>
+      <!-- Receptionist-specific data here -->
+    
+    {% elif role == 'patient' %}
+      <h2>Patient Dashboard</h2>
+      <p class="p-control">Welcome, {{ patient.user.get_full_name }}</p>
+      <h3>Your Appointments</h3>
+      {% if appointments %}
+        <ul>
+          <li>{{ appointments.0.date_time }} with {{ appointments.0.doctor }}</li>
+        </ul>
+      {% else %}
+        <p class="p-control">You have no appointments scheduled.</p>
+      {% endif %}
+    
+    {% else %}
+      <p>Your role is not defined. Please contact support.</p>
+    {% endif %}
+
+<body class="dash-body">
+
+    <header>Dashboard</header> 
+
+    <div class="container">
+        <div class="grid">
+            <div class="box"><a href="{% url 'appointments' %}">Appointments</a></div>
+            <div class="box"><a href="{% url 'labs' %}">Labs</a></div>
+            <div class="box"><a href="{% url 'patient_billing' %}">Billing</a></div>
+            <div class="box">Update Info</div>
+            <div class="box full-width">Message Doctor</div>
+        </div>
+    </div>
+
+  </body>
+</html>

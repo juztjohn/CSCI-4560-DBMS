@@ -1,0 +1,23 @@
+<!-- core/templates/patient_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ patient.user.get_full_name }}</h1>
+    <h2>Your Appointments</h2>
+    {% if appointments %}
+        <ul>
+            {% for appointment in appointments %}
+                <li>{{ appointment.date_time }} with {{ appointment.doctor }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no appointments scheduled.</p>
+    {% endif %}
+    <!-- Add other patient-specific features here -->
+</body>
+</html>
+

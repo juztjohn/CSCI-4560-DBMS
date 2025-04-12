@@ -1,0 +1,42 @@
+<!-- Pay bill here -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing</title>
+</head>
+
+<body class="dash-body">
+    <header>Billing</header>
+    <div class="appt-box bill">
+        <div class="centered-text"><b>Review your bill here.</b></div><br><br>
+        <header class="item-header">
+            <div class="header-item">Amount Due</div>
+            <div class="header-item">Payment Status</div>
+            <div class="header-item">Insurance</div>
+        </header>
+
+        <!--Add bill vars here-->
+        <header class="item-header" style="font-weight: normal">
+            <div class="header-item">Amt</div>
+            <div class="header-item">Status</div>
+            <div class="header-item">Insurance</div>
+        </header>
+   
+    </div>
+    <br><a href="/patient_billing">← Back to Patient Billing</a>
+
+    <!-- Change payment status to true -->
+    <div class="center-container">
+        <button class="pay-btn">Pay Bill</button>
+    </div>
+
+    
+</body>
+
+</html>
