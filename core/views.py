@@ -9,21 +9,14 @@ from .forms import PatientSignUpForm, AppointmentForm
 def home(request):
     return render(request, 'home.html')
 
-<<<<<<< HEAD
 @login_required  # ensures only authenticated users access this view
-=======
-@login_required
->>>>>>> main
 def appointments(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-<<<<<<< HEAD
-        return redirect('patient_registration')  # Replace with the appropriate URL
-=======
         return redirect('patient_registration')
->>>>>>> main
+        
     # Retrieve appointments for the patient
     appts = Appointment.objects.filter(patient=patient)
     return render(request, 'appointments/appointments.html', {'appointments': appts})
@@ -96,7 +89,6 @@ def create_appointment(request):
         form = AppointmentForm()
     return render(request, 'appointments/create_appointment.html', {'form': form})
 
-<<<<<<< HEAD
 @login_required 
 def patient_billing(request):
     try:
@@ -114,5 +106,4 @@ def pay_bill(request):
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
         return redirect('patient_registration') 
     return render(request, 'pay_bill.html')
-=======
->>>>>>> main
+
