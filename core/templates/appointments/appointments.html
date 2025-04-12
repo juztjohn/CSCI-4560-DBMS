@@ -1,10 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
 <!-- templates/appointments/appointments.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+</head>
+=======
     <!-- head content as before -->
     <title>Appointments</title>
 </head>
+<<<<<<<< HEAD:core/templates/appointments_list.html
+>>>>>>> main
+
+<body class="dash-body">
+    <header>Your Appointments</header>
+    <div class="appt-box">
+        <div class="centered-text"><b>Review your appointments here.</b></div><br><br>
+        <header class="item-header">
+<<<<<<< HEAD
+=======
+========
 
 <style>
     * {
@@ -129,16 +150,31 @@
         <div class="centered-text"><b>Review your appointments here.</b></div>
         <br><br>
         <div class="header">
+>>>>>>>> main:core/templates/appointments/appointments.html
+>>>>>>> main
             <div class="header-item">Doctor</div>
             <div class="header-item">Facility</div>
             <div class="header-item">Type</div>
             <div class="header-item">Date</div>
             <div class="header-item">Time</div>
+<<<<<<< HEAD
+        </header>
+        <!--Add appts vars here-->
+        <div class="scrollable-list">
+            {% for appointment in appointments %}
+            <div class="list-item">
+=======
+<<<<<<<< HEAD:core/templates/appointments_list.html
+        </header>
+        <!--Add appts vars here-->
+========
         </div>
+>>>>>>>> main:core/templates/appointments/appointments.html
         <div class="scrollable-list">
             {% for appointment in appointments %}
             <div class="list-item">
                 <!-- Adjust these as necessary based on your model relationships -->
+>>>>>>> main
                 <div class="item-column">{{ appointment.doctor.user.get_full_name }}</div>
                 <div class="item-column">{{ appointment.facility }}</div>
                 <div class="item-column">{{ appointment.appointment_type }}</div>
@@ -147,11 +183,15 @@
             </div>
             {% empty %}
             <div class="list-item">No appointments available</div>
+<<<<<<< HEAD
+            {% endfor %} 
+=======
             {% endfor %}
+>>>>>>> main
         </div>
         <!-- Link to create an appointment -->
             <p><a href="{% url 'create_appointment' %}">Create a new appointment</a></p>
     </div>
-    <br><a href="/patient">← Back to Dashboard</a>
+    <br><a href="/dashboard">← Back to Dashboard</a>
 </body>
 </html>
