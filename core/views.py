@@ -4,20 +4,21 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Patient, Appointment
-from .forms import PatientSignUpForm
+from .forms import PatientSignUpForm, AppointmentForm
 
 def home(request):
     return render(request, 'home.html')
 
 @login_required  # ensures only authenticated users access this view
-def appointment_list(request):
+def appointments(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
         return redirect('patient_registration')  # Replace with the appropriate URL
-    appointments = Appointment.objects.filter(patient=patient)
-    return render(request, 'appointments_list.html', {'appointments': appointments})
+    # Retrieve appointments for the patient
+    appts = Appointment.objects.filter(patient=patient)
+    return render(request, 'appointments/appointments.html', {'appointments': appts})
 
 def patient_registration(request):
     return render(request, 'patient_registration.html')
@@ -57,6 +58,7 @@ def dashboard(request):
         context['role'] = 'admin'
         # Optionally, add admin-specific context data
     elif hasattr(user, 'doctor'):
+        context['doctor_appointments'] = Appointment.objects.filter(doctor=user.doctor)
         context['role'] = 'doctor'
         # Fetch doctor-specific data, e.g.:
         # context['appointments'] = Appointment.objects.filter(doctor=user.doctor)
@@ -73,20 +75,42 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
-@login_required  # ensures only authenticated users access this view
+@login_required
+def doctor_appointments(request):
+    try:
+        doctor = request.user.doctor
+        appts = Appointment.objects.filter(doctor=doctor)
+    except AttributeError:
+        appts = Appointment.objects.none()
+    return render(request, 'doctor/doctor_appointments.html', {'appointments': appts})
+
+@login_required
+def create_appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            appointment.patient = request.user.patient
+            appointment.save()
+            return redirect('appointments')
+    else:
+        form = AppointmentForm()
+    return render(request, 'appointments/create_appointment.html', {'form': form})
+
+@login_required 
 def patient_billing(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')  # Replace with the appropriate URL
+        return redirect('patient_registration')
     return render(request, 'patient_billing.html')
 
-@login_required  # ensures only authenticated users access this view
+@login_required 
 def pay_bill(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')  # Replace with the appropriate URL
+        return redirect('patient_registration') 
     return render(request, 'pay_bill.html')

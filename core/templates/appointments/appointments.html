@@ -1,0 +1,44 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+<!-- templates/appointments/appointments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+</head>
+
+<body class="dash-body">
+    <header>Your Appointments</header>
+    <div class="appt-box">
+        <div class="centered-text"><b>Review your appointments here.</b></div><br><br>
+        <header class="item-header">
+            <div class="header-item">Doctor</div>
+            <div class="header-item">Facility</div>
+            <div class="header-item">Type</div>
+            <div class="header-item">Date</div>
+            <div class="header-item">Time</div>
+        </header>
+        <!--Add appts vars here-->
+        <div class="scrollable-list">
+            {% for appointment in appointments %}
+            <div class="list-item">
+                <div class="item-column">{{ appointment.doctor.user.get_full_name }}</div>
+                <div class="item-column">{{ appointment.facility }}</div>
+                <div class="item-column">{{ appointment.appointment_type }}</div>
+                <div class="item-column">{{ appointment.date }}</div>
+                <div class="item-column">{{ appointment.time }}</div>
+            </div>
+            {% empty %}
+            <div class="list-item">No appointments available</div>
+            {% endfor %} 
+        </div>
+        <!-- Link to create an appointment -->
+            <p><a href="{% url 'create_appointment' %}">Create a new appointment</a></p>
+    </div>
+    <br><a href="/dashboard">← Back to Dashboard</a>
+</body>
+</html>

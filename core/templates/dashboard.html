@@ -18,7 +18,8 @@
     {% elif role == 'doctor' %}
       <h2>Doctor Dashboard</h2>
       <!-- Show doctor-specific details, for example a list of appointments -->
-    
+      <a href="{% url 'doctor_appointments' %}">View Your Appointments</a>   
+
     {% elif role == 'receptionist' %}
       <h2>Receptionist Dashboard</h2>
       <!-- Receptionist-specific data here -->
@@ -47,7 +48,7 @@
 
     <div class="container">
         <div class="grid">
-            <div class="box"><a href="{% url 'appointment_list' %}">Appointments</a></div>
+            <div class="box"><a href="{% url 'appointments' %}">Appointments</a></div>
             <div class="box">Labs</div>
             <div class="box"><a href="{% url 'patient_billing' %}">Billing</a></div>
             <div class="box">Update Info</div>
