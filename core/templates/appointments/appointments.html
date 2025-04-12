@@ -6,26 +6,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointments</title>
 </head>
+=======
+    <!-- head content as before -->
+    <title>Appointments</title>
+</head>
+<<<<<<<< HEAD:core/templates/appointments_list.html
+>>>>>>> main
 
 <body class="dash-body">
     <header>Your Appointments</header>
     <div class="appt-box">
         <div class="centered-text"><b>Review your appointments here.</b></div><br><br>
         <header class="item-header">
+<<<<<<< HEAD
+=======
+========
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #025843;
+        padding: 20px;
+    }
+
+    header {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .container {
+        margin-top: 80px; /* Prevents overlap with fixed header */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 100%;
+    }
+
+    .box {
+        background-color: white;
+        padding: 30px;
+        text-align: left;
+        font-size: 18px;
+        font-weight: normal;
+        color: #333;
+        border-radius: 2px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: 0.3s;
+
+        width: 80vw;   /* 80% of the viewport width */
+        height: 70vh;  /* 70% of the viewport height */
+    
+        display: flex;
+        flex-direction: column;  /* Stack the header and list */
+        overflow: hidden; /* Prevents content overflow outside the box */
+
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between; /* Distribute the titles evenly */
+        font-weight: bold;
+        font-size: 16px;  /* Adjust size relative to container */
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .header-item {
+        flex: 1; /* Make each item take equal width */
+        text-align: center;
+    }
+
+    .centered-text {
+        text-align: center;  /* Center the bolded text */
+    }
+
+    .full-width {
+        grid-column: span 2; /* Makes Message Doctor full width */
+    }
+
+    .scrollable-list {
+        width: 100%;           /* Set the width of the list */
+        height: 75%;          /* Set the height of the list */
+        overflow-y: auto;       /* Enable vertical scrolling */
+        user-select: none;      /* Prevent text selection */
+        border: 1px solid #ccc; /* Optional: Adds a border around the list */
+        padding: 10px;          /* Optional: Adds padding inside the list */
+    }
+
+    .scrollable-list div {
+        padding: 5px;           /* Optional: Adds padding for the items */
+        border-bottom: 1px solid #eee; /* Optional: Adds a border between items */
+    }
+
+    .list-item {
+        display: flex;          /* Use flexbox to arrange columns */
+        width: 100%;            /* Makes the item take up full width */
+        padding: 5px 0;         /* Optional: Adds vertical padding between items */
+    }
+
+    .item-column {
+        flex: 1;                /* Distributes columns equally across each item */
+        text-align: center;     /* Centers the content in each column */
+        padding: 5px;           /* Adds padding inside each column */
+        border-bottom: 1px solid #eee; /* Optional: Adds a border between columns */
+    }
+    </style>
+
+<body>
+    <header>Your Appointments</header>
+    <div class="box">
+        <div class="centered-text"><b>Review your appointments here.</b></div>
+        <br><br>
+        <div class="header">
+>>>>>>>> main:core/templates/appointments/appointments.html
+>>>>>>> main
             <div class="header-item">Doctor</div>
             <div class="header-item">Facility</div>
             <div class="header-item">Type</div>
             <div class="header-item">Date</div>
             <div class="header-item">Time</div>
+<<<<<<< HEAD
         </header>
         <!--Add appts vars here-->
         <div class="scrollable-list">
             {% for appointment in appointments %}
             <div class="list-item">
+=======
+<<<<<<<< HEAD:core/templates/appointments_list.html
+        </header>
+        <!--Add appts vars here-->
+========
+        </div>
+>>>>>>>> main:core/templates/appointments/appointments.html
+        <div class="scrollable-list">
+            {% for appointment in appointments %}
+            <div class="list-item">
+                <!-- Adjust these as necessary based on your model relationships -->
+>>>>>>> main
                 <div class="item-column">{{ appointment.doctor.user.get_full_name }}</div>
                 <div class="item-column">{{ appointment.facility }}</div>
                 <div class="item-column">{{ appointment.appointment_type }}</div>
@@ -34,7 +183,11 @@
             </div>
             {% empty %}
             <div class="list-item">No appointments available</div>
+<<<<<<< HEAD
             {% endfor %} 
+=======
+            {% endfor %}
+>>>>>>> main
         </div>
         <!-- Link to create an appointment -->
             <p><a href="{% url 'create_appointment' %}">Create a new appointment</a></p>

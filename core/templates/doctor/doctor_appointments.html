@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Appointments</title>
+    <style>
+        /* Include styles (similar to your patient appointments template) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .appointments-container {
+            margin-top: 20px;
+        }
+        .appointment-item {
+            background: white;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Appointments as a Doctor</h1>
+    </header>
+    <div class="appointments-container">
+        {% if appointments %}
+            {% for appointment in appointments %}
+                <div class="appointment-item">
+                    <strong>Patient:</strong> {{ appointment.patient.user.get_full_name }}<br>
+                    <strong>Facility:</strong> {{ appointment.facility }}<br>
+                    <strong>Type:</strong> {{ appointment.appointment_type }}<br>
+                    <strong>Date:</strong> {{ appointment.date }}<br>
+                    <strong>Time:</strong> {{ appointment.time }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No appointments scheduled.</p>
+        {% endif %}
+    </div>
+    <br>
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
+
