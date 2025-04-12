@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Patient, Doctor, Appointment
-from .models import Patient, Appointment
 
 class PatientSignUpForm(UserCreationForm):
     phone = forms.CharField(max_length=20, required=True)
