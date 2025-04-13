@@ -24,9 +24,7 @@ class PatientSignUpForm(UserCreationForm):
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['patient', 'facility', 'doctor', 'appointment_type', 'date_time', 'notes']
-        # Optionally add widgets or labels:
+        fields = ['facility', 'doctor', 'appointment_type', 'date_time', 'notes']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'time': forms.TimeInput(attrs={'type': 'time'}),
+            'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline'}),
         }

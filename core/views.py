@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Patient, Appointment
+from .models import Patient, Appointment, Lab, Billing
 from .forms import PatientSignUpForm, AppointmentForm
 
 def home(request):
@@ -32,19 +32,6 @@ def patient_signup(request):
     else:
         form = PatientSignUpForm()
     return render(request, 'patient_signup.html', {'form': form})
-
-@login_required
-def patient_dashboard(request):
-    try:
-        patient = request.user.patient
-    except Patient.DoesNotExist:
-        return redirect('patient_registration')
-    appts = Appointment.objects.filter(patient=patient)
-    context = {
-        'patient': patient,
-        'appointments': appts,
-    }
-    return render(request, 'patient_dashboard.html', context)
 
 @login_required
 def dashboard(request):
@@ -88,3 +75,33 @@ def create_appointment(request):
         form = AppointmentForm()
     return render(request, 'appointments/create_appointment.html', {'form': form})
 
+@login_required 
+def patient_billing(request):
+    try:
+        patient = request.user.patient
+    except Patient.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration')
+    bills = Billing.objects.filter(patient=patient)
+    return render(request, 'patient_billing.html')
+
+@login_required 
+def pay_bill(request):
+    try:
+        patient = request.user.patient
+    except Patient.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration') 
+    return render(request, 'pay_bill.html')
+
+@login_required
+def labs(request):
+    try:
+        patient = request.user.patient
+    except Patient.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration')
+
+    # Retrieve labs for the patient
+    patient_labs = Lab.objects.filter(patient=patient)
+    return render(request, 'labs.html', {'labs': patient_labs})

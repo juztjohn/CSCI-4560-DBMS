@@ -3,6 +3,7 @@ from django.contrib.auth.models import User  # using built-in User model for acc
 from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from datetime import date
 
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # link to auth user
@@ -35,3 +36,26 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"Appointment on {self.date_time:%Y-%m-%d %H:%M} with {self.doctor}"
+
+class Lab(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    test = models.CharField(max_length=100, default='Flu')
+    test_result = models.CharField(max_length=100, default='Negative')
+    date = models.DateField(default=date.today)
+
+    class Meta:
+        ordering = ['date']
+
+class Billing(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    amount_due = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_status = models.CharField(
+        max_length=20,
+        choices=[('Pending', 'Pending'), ('Paid', 'Paid')],
+        default='Pending'
+    )
+    insurance = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Billing for {self.patient} - {self.amount_due}"
