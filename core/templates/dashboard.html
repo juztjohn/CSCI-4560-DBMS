@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<!-- Background Container -->
+<div class="bg-cover bg-center h-screen" style="background-image: url('{% static 'img/background.jpg' %}')">
+  <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
+    <!-- Dashboard Heading and Role Specific Info -->
+    <h2 class="text-5xl mb-3 text-black">Dashboard</h2>
+    {% if role == 'admin' %}
+      <h3 class="text-3xl text-black mb-4">Admin Panel</h3>
+    {% elif role == 'doctor' %}
+      <h3 class="text-3xl text-black mb-4">Doctor Dashboard again but smaller</h3>
+      <a href="{% url 'doctor_appointments' %}"
+         class="col-span-2 w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
+          View Your Appointments
+      </a>
+    {% elif role == 'receptionist' %}
+      <h3 class="text-3xl text-black mb-4">Receptionist Dashboard</h3>
+    {% elif role == 'patient' %}
+      <h3 class="text-3xl text-black mb-2">Patient Dashboard</h3>
+      <p class="text-2xl text-black mb-4">Welcome, {{ patient.user.get_full_name }}</p>
+      {% if appointments %}
+        <p class="text-xl text-black mb-2">You have {{ appointments|length }} appointments scheduled.</p>
+      {% else %}
+        <p class="text-xl text-black mb-4">You have no appointments scheduled.</p>
+      {% endif %}
+    {% else %}
+      <p class="text-xl text-black mb-4">Your role is not defined. Please contact support.</p>
+    {% endif %}
+
+    <!-- Navigation Grid for Major Dashboard Functions -->
+    <div class="container py-10 px-10 mx-0 flex flex-col items-center">
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Appointments -->
+        <a href="{% url 'appointments' %}"
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Appointments
+        </a>
+        <!-- Labs -->
+        <a href="{% url 'labs' %}" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Labs
+        </a>
+        <!-- Billing -->
+        <a href="{% url 'patient_billing' %}" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Billing
+        </a>
+        <!-- Update Info -->
+        <a href="#" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Update Info
+        </a>
+        <!-- Message Doctor (spanning two columns) -->
+        <a href="#"
+           class="col-span-2 w-100 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
+          Message Doctor
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
