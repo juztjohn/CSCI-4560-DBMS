@@ -1,0 +1,51 @@
+{% load tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %} - CSCI 4560 Database Project</title>
+    {% tailwind_css %}
+</head>
+<body>
+    <nav class="nav bg-gray-900 text-white flex justify-between items-center p-3 px-8 md:px-20">
+        <a href="/" class="text-lg font-bold">The Bone Zone</a>
+        <div class="bg-gray-900 hidden items-center md:block">
+            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Home</a>
+            <a href="/appointments" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Appointments</a>
+            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Labs</a>
+            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Billing</a>
+            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Message</a>
+          </div>
+    </nav>
+
+      {% block content %}{% endblock %}
+      
+    <footer class='bg-gray-900 text-white p-8 pb-2 grid md:grid-cols-3 md:gap-10 lg:gap-20 xl:gap-30 2xl:gap-40 md:px-40'>
+        <div class='blog-name'>
+            <p class='text-xl font-bold'>The Bone Zone<p>
+            <p class='my-3 text-justify'>About goes here</p>
+        </div>
+        <div class='pages'>
+            <p class='text-xl font-bold'>Pages<p>
+            <ul class='my-3'>
+                <li><a href='/'><i class="bi bi-arrow-right-short"></i> Privacy Policy</a></li>
+                <li><a href='/'<i class="bi bi-arrow-right-short"></i> Disclaimer</a></li>
+            </ul>
+        </div>
+        <div class='socials'>
+            <p class='text-xl font-bold'>Github<p>
+            <ul class='my-3 flex text-xl'>
+                <li><a href='/' class='hover:text-blue-100'><i class="bi bi-github"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <div class='bg-slate-800 text-white text-justify flex justify-center items-center'>
+        <p class='p-2'>Created by John Byrd, Jaron McCutcheon, and Elaina Vogel. Frontend design currently based on site by <span class="text-blue-300 text-justify"><a href="/" target="_blank">ashish</a></span></p>
+    </div>
+</body>
+
+</html>
