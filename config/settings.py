@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import platform
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,3 +132,10 @@ STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TAILWIND_APP_NAME = 'theme'
+
+if platform.system() == 'Windows':
+    print(platform.system())
+    NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
+else:
+    print(platform.system())
+    NPM_BIN_PATH = 'npm'

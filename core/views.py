@@ -83,7 +83,7 @@ def patient_billing(request):
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
         return redirect('patient_registration')
     bills = Billing.objects.filter(patient=patient)
-    return render(request, 'patient_billing.html')
+    return render(request, 'patient_billing.html', {'bills' : bills})
 
 @login_required 
 def pay_bill(request):
