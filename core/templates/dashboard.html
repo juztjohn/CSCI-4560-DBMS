@@ -1,48 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}About{% endblock title %}
+{% block title %}Dashboard{% endblock title %}
 
 {% block content %}
-
-    <h1>Dashboard</h1>
-    
+<!-- Background Container -->
+<div class="bg-cover bg-center h-screen" style="background-image: url('{% static 'img/background.jpg' %}')">
+  <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
+    <!-- Dashboard Heading and Role Specific Info -->
+    <h2 class="text-5xl mb-3 text-black">Dashboard</h2>
     {% if role == 'admin' %}
-      <h2>Admin Panel</h2>
-      <!-- Admin specific content goes here -->
-    
+      <h3 class="text-3xl text-black mb-4">Admin Panel</h3>
     {% elif role == 'doctor' %}
-      <h2>Doctor Dashboard</h2>
-      <!-- Show doctor-specific details, for example a list of appointments -->
-       <a href="{% url 'doctor_appointments' %}">View Your Appointments</a>   
+      <h3 class="text-3xl text-black mb-4">Doctor Dashboard again but smaller</h3>
+      <a href="{% url 'doctor_appointments' %}"
+         class="col-span-2 w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
+          View Your Appointments
+      </a>
     {% elif role == 'receptionist' %}
-      <h2>Receptionist Dashboard</h2>
-      <!-- Receptionist-specific data here -->
-    
+      <h3 class="text-3xl text-black mb-4">Receptionist Dashboard</h3>
     {% elif role == 'patient' %}
-      <h2>Patient Dashboard</h2>
-      <p>Welcome, {{ patient.user.get_full_name }}</p>
-      <h3>Your Appointments</h3>
+      <h3 class="text-3xl text-black mb-2">Patient Dashboard</h3>
+      <p class="text-2xl text-black mb-4">Welcome, {{ patient.user.get_full_name }}</p>
       {% if appointments %}
-        <ul>
-          {% for appointment in appointments %}
-            <li>{{ appointment.date_time }} with {{ appointment.doctor }}</li>
-          {% endfor %}:
-        </ul>
+        <p class="text-xl text-black mb-2">You have {{ appointments|length }} appointments scheduled.</p>
       {% else %}
-        <p>You have no appointments scheduled.</p>
+        <p class="text-xl text-black mb-4">You have no appointments scheduled.</p>
       {% endif %}
-    
     {% else %}
-      <p>Your role is not defined. Please contact support.</p>
+      <p class="text-xl text-black mb-4">Your role is not defined. Please contact support.</p>
     {% endif %}
 
-    <div class="container">
-        <div class="grid">
-            <div class="box"><a href="{% url 'appointments' %}">Appointments</a></div>
-            <div class="box">Labs</div>
-            <div class="box">Billing</div>
-            <div class="box">Update Info</div>
-            <div class="box full-width">Message Doctor</div>
-        </div>
+    <!-- Navigation Grid for Major Dashboard Functions -->
+    <div class="container py-10 px-10 mx-0 flex flex-col items-center">
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Appointments -->
+        <a href="{% url 'appointments' %}"
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Appointments
+        </a>
+        <!-- Labs -->
+        <a href="#" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Labs
+        </a>
+        <!-- Billing -->
+        <a href="#" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Billing
+        </a>
+        <!-- Update Info -->
+        <a href="#" 
+           class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+          Update Info
+        </a>
+        <!-- Message Doctor (spanning two columns) -->
+        <a href="#"
+           class="col-span-2 w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
+          Message Doctor
+        </a>
+      </div>
     </div>
-{% endblock %}
+  </div>
+</div>
+{% endblock content %}
+

@@ -1,28 +1,33 @@
+{% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Patient Sign Up</title>
-</head>
-<body>
-    <!-- Header section -->
-    <header>
-        Patient Sign Up
-    </header>
+{% block title %}Patient Sign Up{% endblock title %}
 
-    <!-- Signup container-->
-    <div class="signup-container">
-    <form method="post">
+{% block content %}
+<main class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md">
+    <div class="bg-white p-8 rounded shadow-md">
+      <h2 class="text-left text-2xl font-bold mb-6">Patient Sign Up</h2>
+      <form method="post" class="space-y-4">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
-    <!-- You can add a link back to home or login if desired -->
-    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        {% for field in form %}
+          <div>
+            <label for="{{ field.id_for_label }}" class="block text-gray-700 mb-1">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <p class="text-red-500 text-xs mt-1">{{ field.errors|striptags }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded">
+          Sign Up
+        </button>
+      </form>
+      <p class="mt-4 text-center">
+        Already have an account? <a href="{% url 'login' %}" class="text-blue-500 underline">Login</a>
+      </p>
     </div>
-</body>
-</html>
+  </div>
+</main>
+{% endblock content %}
 

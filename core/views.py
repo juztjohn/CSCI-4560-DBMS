@@ -15,7 +15,7 @@ def appointments(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')
+        return redirect('patient_signup')
     # Retrieve appointments for the patient
     appts = Appointment.objects.filter(patient=patient)
     return render(request, 'appointments/appointments.html', {'appointments': appts})
