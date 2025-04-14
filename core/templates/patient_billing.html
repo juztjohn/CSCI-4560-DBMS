@@ -7,10 +7,17 @@
 <div class="min-h-screen bg-gray-100 flex justify-center py-10">
   <div class="w-full max-w-4xl">
     <header class="text-center text-3xl font-bold mb-8">Billing</header>
+    
+    <form method="post" action="{% url 'pay_bill' %}">
+      {% csrf_token %}
+
     <div class="overflow-x-auto shadow rounded-lg bg-white">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
+
+            <th></th> <!-- For selection -->
+
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Amount Due
             </th>
@@ -24,7 +31,10 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           {% for bill in bills %}
-            <tr>
+            <t class="hover:bg-gray-100">
+              <td class="px-4 py-4 text-center">
+                <input type="radio" name="selected_bill" value="{{ bill.id }}" class="form-radio text-indigo-600">
+              </td>
               <td class="px-6 py-4 whitespace-nowrap">${{ bill.amount_due }}</td>
               <td class="px-6 py-4 whitespace-nowrap">{{ bill.payment_status }}</td>
               <td class="px-6 py-4 whitespace-nowrap">{{ bill.insurance }}</td>
@@ -37,12 +47,19 @@
         </tbody>
       </table>
     </div>
+
     <div class="mt-6 text-center">
       <!-- This button could trigger a view to pay or create a bill, as needed -->
-      <a href="{% url 'pay_bill' %}" class="inline-block px-6 py-3 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold rounded">
+      <!--<a href="{% url 'pay_bill' %}" class="inline-block px-6 py-3 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold rounded">
         Pay Selected Bill
-      </a>
+      </a>-->
+      <button type="submit" class="inline-block px-6 py-3 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold rounded">
+        Pay Selected Bill
+      </button>
     </div>
+
+</form>
+
     <div class="mt-6 text-center">
       <a href="{% url 'dashboard' %}" class="text-blue-500 underline">← Back to Dashboard</a>
     </div>

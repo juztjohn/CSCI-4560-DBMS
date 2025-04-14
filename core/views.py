@@ -87,12 +87,18 @@ def patient_billing(request):
 
 @login_required 
 def pay_bill(request):
-    try:
-        patient = request.user.patient
-    except Patient.DoesNotExist:
-        messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration') 
-    return render(request, 'pay_bill.html')
+    if request.method == 'POST':
+        bill_id = request.POST.get('selected_bill')
+    
+        if bill_id:
+            try:
+                bill = get_object_or_404(Billing, id=bill_id)
+                return render(request, 'pay_bill.html', {"bill": bill})
+            except (ValueError, TypeError):
+                pass # ignore button
+
+    # If no bill was selected or method isn't POST
+    return render(request, 'patient_billing.html')
 
 @login_required
 def labs(request):
@@ -119,3 +125,15 @@ def patient_updateinfo(request):
         form = PatientUpdateForm(instance=patient, user=request.user)
 
     return render(request, 'patient_updateinfo.html', {'form': form})
+
+
+@login_required
+def confirm_payment(request):
+    if request.method == 'POST':
+        bill_id = request.POST.get('bill_id')
+        if bill_id:
+            bill = get_object_or_404(Billing, id=bill_id)
+            bill.payment_status = 'Paid'
+            bill.save()
+            return redirect('patient_billing')
+    return redirect('patient_billing')
