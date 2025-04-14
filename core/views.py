@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Patient, Appointment, Lab, Billing
-from .forms import PatientSignUpForm, AppointmentForm
+from .forms import PatientSignUpForm, AppointmentForm, PatientUpdateForm
 
 def home(request):
     return render(request, 'home.html')
@@ -105,3 +105,17 @@ def labs(request):
     # Retrieve labs for the patient
     patient_labs = Lab.objects.filter(patient=patient)
     return render(request, 'labs.html', {'labs': patient_labs})
+
+@login_required
+def patient_updateinfo(request):
+    patient = Patient.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = PatientUpdateForm(request.POST, instance=patient, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was updated successfully.')
+            return redirect('dashboard')  # or wherever you want to redirect
+    else:
+        form = PatientUpdateForm(instance=patient, user=request.user)
+
+    return render(request, 'patient_updateinfo.html', {'form': form})
