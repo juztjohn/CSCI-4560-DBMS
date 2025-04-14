@@ -15,11 +15,18 @@
     <nav class="nav bg-gray-900 text-white flex justify-between items-center p-3 px-8 md:px-20">
         <a href="/" class="text-lg font-bold">Health Portal</a>
         <div class="bg-gray-900 hidden items-center md:block">
-            <a href="/dashboard" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Home</a>
-            <a href="/appointments" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Appointments</a>
-            <a href="/labs" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Labs</a>
+            {% if user.is_authenticated %}
+            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Home</a>
+            <a href="{% url 'appointments' %}" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Appointments</a>
+            <a href="{% url 'labs' %}" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Labs</a>
             <a href="/patient_billing" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Billing</a>
             <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Message</a>
+              <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+              </form>
+            {% endif %}
+
         </div>
     </nav>
 

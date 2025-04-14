@@ -20,9 +20,6 @@ def appointments(request):
     appts = Appointment.objects.filter(patient=patient)
     return render(request, 'appointments/appointments.html', {'appointments': appts})
 
-def patient_registration(request):
-    return render(request, 'patient_registration.html')
-
 def patient_signup(request):
     if request.method == 'POST':
         form = PatientSignUpForm(request.POST)
@@ -81,7 +78,7 @@ def patient_billing(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')
+        return redirect('patient_signup')
     bills = Billing.objects.filter(patient=patient)
     return render(request, 'patient_billing.html', {'bills': bills})
 
@@ -91,7 +88,7 @@ def pay_bill(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration') 
+        return redirect('patient_signup') 
     return render(request, 'pay_bill.html')
 
 @login_required
@@ -100,7 +97,7 @@ def labs(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_registration')
+        return redirect('patient_signup')
 
     # Retrieve labs for the patient
     patient_labs = Lab.objects.filter(patient=patient)

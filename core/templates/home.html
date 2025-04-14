@@ -4,22 +4,28 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<div class="bg-cover bg-center h-screen flex items-top" style="background-image: url('{% static 'img/background.jpg' %}')">
-    <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
-        <h2 class="text-5xl mb-3 text-black">Welcome to the Bone Zone</h2>
-        <p class="text-black text-2xl">
-           You got the bones, we got the zone 
-        </p>
-        <div class="flex flex-row space-x-4 items-center justify-center mt-5">
-            <a href="{% url 'patient_signup' %}"  class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
-                Sign Up
-            </a>
-            <a href="{% url 'login' %}" class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
-                Login
-            </a>
+    <div class="bg-cover bg-center h-screen flex items-top" style="background-image: url('{% static 'img/background.jpg' %}')">
+        <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
+            <h2 class="text-5xl mb-3 text-black">Welcome to the Bone Zone</h2>
+            <p class="text-black text-2xl">
+               You got the bones, we got the zone 
+            </p>
+            <div class="flex flex-row space-x-4 items-center justify-center mt-5">
+             {% if not user.is_authenticated %}
+                <a href="{% url 'patient_signup' %}"  class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
+                    Sign Up
+                </a>
+                <a href="{% url 'login' %}" class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
+                    Login
+                </a>
+            {% else %}
+                <a href="{% url 'create_appointment' %}" class="w-96 h-16 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
+                  Schedule an Appointment
+                </a>
+            {% endif %}
+            </div>
         </div>
     </div>
-</div>
 
 <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
   <h2 class="text-5xl mb-3 text-black">Careers</h2>
