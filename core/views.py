@@ -2,9 +2,10 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Patient, Appointment, Lab, Billing
-from .forms import PatientSignUpForm, AppointmentForm
+from .models import Patient, Doctor, Appointment, Lab, Billing, Message
+from .forms import PatientSignUpForm, AppointmentForm, PatientMessageForm, DoctorMessageForm
 
 def home(request):
     return render(request, 'home.html')
@@ -105,3 +106,47 @@ def labs(request):
     # Retrieve labs for the patient
     patient_labs = Lab.objects.filter(patient=patient)
     return render(request, 'labs.html', {'labs': patient_labs})
+
+@login_required
+def user_messages(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        messages.error(request, "You do not have a patient profile. Please complete your registration.")
+        return redirect('patient_registration')
+
+    # Retrieve messages for the patient
+    if hasattr(user, 'patient'):
+        patient_messages = Message.objects.filter(patient=user.patient)
+        return render(request, 'messages/messages.html', {'messages': patient_messages})
+    # Retrieve messages for the doctor
+    elif hasattr(user, 'doctor'):
+        doctor_messages = Message.objects.filter(doctor=user.doctor)
+        return render(request, 'messages/messages.html', {'messages': doctor_messages})
+    
+@login_required
+def create_message(request):
+    user = request.user
+    if request.method == 'POST':
+        if hasattr(user, 'patient'):
+            form = PatientMessageForm(request.POST)
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.patient = user.patient
+                message.created_by = user
+                message.save()
+                return redirect('messages')
+        elif hasattr(user, 'doctor'):
+            form = DoctorMessageForm(request.POST)
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.doctor = user.doctor
+                message.created_by = user
+                message.save()
+                return redirect('messages')
+    else:
+        if hasattr(user, 'patient'):
+            form = PatientMessageForm()
+        elif hasattr(user, 'doctor'):
+            form = DoctorMessageForm()
+    return render(request, 'messages/create_message.html', {'form': form})

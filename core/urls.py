@@ -12,4 +12,6 @@ urlpatterns = [
     path('patient_billing/', views.patient_billing, name='patient_billing'),
     path('pay_bill/', views.pay_bill, name='pay_bill'),
     path('labs/', views.labs, name='labs'),
+    path('messages/', views.user_messages, name='messages'),
+    path('messages/create_message/', views.create_message, name='create_message'),
 ]
