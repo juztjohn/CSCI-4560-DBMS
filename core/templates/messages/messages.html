@@ -11,19 +11,19 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               From
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               To
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="w-full px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Message
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Date
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Time
             </th>
           </tr>
@@ -32,7 +32,7 @@
           {% for message in messages %}
             <tr>
               <!-- "From" column: diplays sender based on created_by -->
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="w-24 px-6 py-4 whitespace-nowrap">
                 {% if message.created_by == message.doctor.user %}
                   {{ message.doctor.user.get_full_name }}
                 {% else %}
@@ -40,20 +40,20 @@
                 {% endif %}
               </td>
               <!-- "From" column: diplays sender based on created_by -->
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="w-24 px-6 py-4 whitespace-nowrap">
                 {% if message.created_by == message.doctor.user %}
                   {{ message.patient.user.get_full_name }}
                 {% else %}
                   {{ message.doctor.user.get_full_name }}
                 {% endif %}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="w-full px-6 py-4 whitespace-nowrap">
                 {{ message.message }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="w-24 px-6 py-4 whitespace-nowrap">
                 {{ message.date }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="w-24 px-6 py-4 whitespace-nowrap">
                 {{ message.time }}
               </td>
             </tr>
