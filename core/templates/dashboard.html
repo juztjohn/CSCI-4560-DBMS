@@ -5,29 +5,34 @@
 
 {% block content %}
 <!-- Background Container -->
-<div class="bg-cover bg-center h-screen" style="background-image: url('{% static 'img/background.jpg' %}')">
+<div class="bg-cover bg-center h-screen">
   <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
     <!-- Dashboard Heading and Role Specific Info -->
     <h2 class="text-5xl mb-3 text-black">Dashboard</h2>
+
     {% if role == 'admin' %}
       <h3 class="text-3xl text-black mb-4">Admin Panel</h3>
+
     {% elif role == 'doctor' %}
-      <h3 class="text-3xl text-black mb-4">Doctor Dashboard again but smaller</h3>
-        <!-- Navigation Grid for Major Dashboard Functions -->
-        <div class="container py-10 px-10 mx-0 flex flex-col items-center">
-          <div class="grid grid-cols-2 gap-4">
-            <!-- Appointments -->
-            <a href="{% url 'doctor_appointments' %}"
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Appointments
-            </a>
-            <!-- Patients-->
-            <a href="#" 
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Patients
-            </a>
-          </div>
+      <h3 class="text-3xl text-black mb-4">Doctor Dashboard</h3>
+      <div class="py-10 flex flex-col items-center">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Appointments -->
+          <a href="{% url 'doctor_appointments' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Appointments
+          </a>
+          <!-- Patients -->
+            <a href="{% url 'doctor_patient_list' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Patients
+          </a>
         </div>
+      </div>
 
     {% elif role == 'receptionist' %}
       <h3 class="text-3xl text-black mb-4">Receptionist Dashboard</h3>
@@ -40,36 +45,47 @@
       {% else %}
         <p class="text-xl text-black mb-4">You have no appointments scheduled.</p>
       {% endif %}
-        <!-- Navigation Grid for Major Dashboard Functions -->
-        <div class="container py-10 px-10 mx-0 flex flex-col items-center">
-          <div class="grid grid-cols-2 gap-4">
-            <!-- Appointments -->
-            <a href="{% url 'appointments' %}"
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Appointments
-            </a>
-            <!-- Labs -->
-            <a href="{% url 'labs' %}" 
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Labs
-            </a>
-            <!-- Billing -->
-            <a href="{% url 'patient_billing' %}" 
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Billing
-            </a>
-            <!-- Update Info -->
-            <a href="{% url 'patient_updateinfo' %}" 
-               class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-              Update Info
-            </a>
-            <a href="{% url 'messages' %}"
-               class="col-span-2 w-100 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
-              Message Doctor
-            </a>
-          </div>
+      <div class="py-10 flex flex-col items-center">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Appointments -->
+          <a href="{% url 'appointments' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Appointments
+          </a>
+          <!-- Labs -->
+          <a href="{% url 'labs' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Labs
+          </a>
+          <!-- Billing -->
+          <a href="{% url 'patient_billing' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Billing
+          </a>
+          <!-- Update Info -->
+          <a href="{% url 'patient_updateinfo' %}"
+             class="w-48 h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Update Info
+          </a>
+          <!-- Message Doctor -->
+          <a href="{% url 'messages' %}"
+             class="col-span-2 w-full h-24 bg-blue-700 hover:bg-blue-800 text-white font-bold text-2xl
+                    flex items-center justify-center rounded shadow-lg hover:shadow-2xl
+                    border-2 border-sky-900 transition-shadow duration-200">
+            Message Doctor
+          </a>
         </div>
+      </div>
     {% endif %}
   </div>
 </div>
 {% endblock content %}
+
