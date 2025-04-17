@@ -1,39 +1,60 @@
-# CSCI-4560-DBMS
+# Healthcare Portal
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Neovim](https://img.shields.io/badge/neovim-0078d7.svg?style=for-the-badge&logo=neovim)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
 [Github Repository](https://github.com/juztjohn/CSCI-4560-DBMS)
 
-We will be creating a fully functional healthcare portal that allows patients and staff to access relevant information. Security and availability will be our main focuses of this project, as a real healthcare portal must be HIPAA compliant and highly available. 
+## Introduction
+This is a lightweight user-friendly heatlhcare portal using Django and Tailwind CSS for CSCI-4560.
 
-We will be implementing security best practices such as role-based access and password hashing using the SHA256 algorithm and ensuring that the website and database is not prone to crashes or errors that may disrupt the user experience.
-# Team
-**Elaina Vogel** 
-- Frontend Development
 
-**Jaron McCutcheon**
-- Backend Development
+## Team
+**Elaina Vogel**, **Jaron McCutcheon**, **John Byrd**
 
-**John Byrd**
-- Merging/Testing
-- Additional Frontend/Backend Development
-# Technology Used
-<div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/django/django-plain-wordmark.svg" title="Django" alt="Django" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MySQL" alt="MySQL" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original-wordmark.svg" title="Python" alt="Python" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="html" alt="C#" width="40" height="40"/>&nbsp;
-</div>
+## Requirements
+Node.js (https://nodejs.org)
 
-# Setup the UI
+npm (Included with Node.js)
 
-1. Install the files in your desired location
-2. Create a virtual environment and activate it as your python source
-3. Run the following in the terminal:
+## Quick Start Guide
+
+1. Clone the github repo in your desired location using `git clone`
+2. Install [Node.js](http://nodejs.org) by running the installer on Windows/Mac or using your preferred package manager on Mac/Linux
+3. Create a Python virtual environment and activate it as your python source
+
+```
+python -m venv <venv-name>
+```
+Mac/Linux activation
+```
+source <venv-name>/bin/activate
+```
+Windows activation (PowerShell)
+```
+.\<venv-name>\bin\activate.ps1
+```
+Windows activation (CMD)
+```
+.\<venv-name>\bin\activate.bat
+```
+4. Install all requirements in your activated virtual environment:
 ```
 pip install -r requirements.txt
 ```
-4. Navigate to the medical_records_portal folder in the terminal
-5. Run the following command in the terminal:
+5. Install and start tailwind
+```
+python manage.py tailwind install
+```
+```
+python manage.py tailwind start
+```
+6. Run the following command in the terminal:
 ```
 python manage.py runserver
 ```
-6. Open a browser and enter "http:127.0.0.1:8000/home" as the url to view the login page
-7. Enter "http:127.0.0.1:8000/patient" as the url to view the patient view page
+7. Open your preferred browser and connect to "127.0.0.1:8000"
