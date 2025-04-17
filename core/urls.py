@@ -14,5 +14,6 @@ urlpatterns = [
     path('labs/', views.labs, name='labs'),
     path('patient_updateinfo/', views.patient_updateinfo, name='patient_updateinfo'),
     path('confirm_payment/', views.confirm_payment, name='confirm_payment'),
-
+    path('messages/', views.user_messages, name='messages'),
+    path('messages/create_message/', views.create_message, name='create_message'),
 ]

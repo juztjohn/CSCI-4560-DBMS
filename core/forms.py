@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Patient, Appointment
+from .models import Patient, Appointment, Message
 
 class PatientSignUpForm(UserCreationForm):
     phone = forms.CharField(max_length=20, required=True)
@@ -28,7 +28,6 @@ class AppointmentForm(forms.ModelForm):
         widgets = {
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline'}),
         }
-
 
 class PatientUpdateForm(forms.ModelForm):
     # These fields are from the User model
@@ -69,3 +68,13 @@ class PatientUpdateForm(forms.ModelForm):
             patient.save()
 
         return patient
+    
+class PatientMessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['doctor', 'message']
+
+class DoctorMessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['patient', 'message']
