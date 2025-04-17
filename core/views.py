@@ -4,13 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-from .models import Patient, Appointment, Lab, Billing
-from .forms import PatientSignUpForm, AppointmentForm, PatientUpdateForm
-=======
 from .models import Patient, Doctor, Appointment, Lab, Billing, Message
-from .forms import PatientSignUpForm, AppointmentForm, PatientMessageForm, DoctorMessageForm
->>>>>>> 74b3c78dade1c9650691047d9379a19956c7fe5a
+from .forms import PatientSignUpForm, AppointmentForm, PatientUpdateForm, PatientMessageForm, DoctorMessageForm
 
 def home(request):
     return render(request, 'home.html')
