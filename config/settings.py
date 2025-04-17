@@ -134,8 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TAILWIND_APP_NAME = 'theme'
 
 if platform.system() == 'Windows':
-    print(platform.system())
-    NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
+    NPM_BIN_PATH = 'C:\\Program Files\\nodejs\\npm.cmd'
 else:
-    print(platform.system())
     NPM_BIN_PATH = 'npm'

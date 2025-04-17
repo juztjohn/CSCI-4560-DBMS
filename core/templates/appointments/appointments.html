@@ -4,9 +4,10 @@
 {% block title %}Appointments{% endblock title %}
 
 {% block content %}
-  <header class="text-center text-3xl font-bold py-4">Your Appointments</header>
-  <div class="container mx-auto px-4">
-    <div class="overflow-x-auto shadow rounded-lg">
+<div class="min-h-screen bg-gray-100 flex justify-center py-10">
+  <div class="w-full max-w-4xl">
+    <header class="text-center text-3xl font-bold mb-8">Appointments</header>
+    <div class="overflow-x-auto shadow rounded-lg bg-white">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -40,10 +41,10 @@
                 {{ appointment.appointment_type }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                {{ appointment.date }}
+                {{ appointment.date_time|date:"M-d-y" }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                {{ appointment.time }}
+                {{ appointment.date_time|date:"g:i A" }}
               </td>
             </tr>
           {% empty %}
@@ -61,11 +62,12 @@
         Create a new appointment
       </a>
     </div>
+    <div class="mt-6 text-center">
+      <a href="/dashboard" class="text-blue-500 underline">← Back to Dashboard</a>
+    </div>
+      <!-- Spacer: Adjust the value as needed -->
+    <div class="h-[700px]"></div>
   </div>
-  <div class="mt-6 text-center">
-    <a href="/dashboard" class="text-blue-500 underline">← Back to Dashboard</a>
-  </div>
-    <!-- Spacer: Adjust the value as needed -->
-  <div class="h-[700px]"></div>
+</div>
 {% endblock content %}
 

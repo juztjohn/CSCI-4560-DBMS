@@ -26,25 +26,20 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            {% for bill in bills %}
-              <tr>
-                <td class="px-6 py-4 whitespace-nowrap">${{ bill.amount_due }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ bill.payment_status }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ bill.insurance }}</td>
-              </tr>
-            {% empty %}
-              <tr>
-                <td colspan="3" class="px-6 py-4 text-center">No bills available</td>
-              </tr>
-            {% endfor %}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">${{ bill.amount_due }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ bill.payment_status }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ bill.insurance }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
       
       <div class="mt-6 text-center">
-        <form method="post" action="{% url 'pay_bill' %}">
+        <form method="post" action="{% url 'confirm_payment' %}">
           {% csrf_token %}
           <!-- If needed, include hidden fields here -->
+          <input type="hidden" name="bill_id" value="{{ bill.id }}">
           <button type="submit" class="w-full py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded">
             Pay Bill
           </button>

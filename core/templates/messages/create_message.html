@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Message{% endblock title %}
+
+{% block content %}
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md">
+    <header class="text-center text-2xl font-bold mb-8">
+      Create Message
+    </header>
+    <div class="bg-white p-8 rounded shadow-md">
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded">
+          Create Message
+        </button>
+      </form>
+      <p class="text-center mt-4">
+        <a href="{% url 'messages' %}" class="text-blue-500 hover:underline">Back to Messages</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

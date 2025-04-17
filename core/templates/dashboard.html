@@ -50,13 +50,13 @@
           Billing
         </a>
         <!-- Update Info -->
-        <a href="#" 
+        <a href="{% url 'patient_updateinfo' %}" 
            class="w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
           Update Info
         </a>
         <!-- Message Doctor (spanning two columns) -->
-        <a href="#"
-           class="col-span-2 w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
+        <a href="{% url 'messages' %}"
+           class="col-span-2 w-100 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center text-center rounded border border-black">
           Message Doctor
         </a>
       </div>
