@@ -41,10 +41,10 @@
                 {{ appointment.appointment_type }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                {{ appointment.date }}
+                {{ appointment.date_time|date:"M-d-y" }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                {{ appointment.time }}
+                {{ appointment.date_time|date:"g:i A" }}
               </td>
             </tr>
           {% empty %}

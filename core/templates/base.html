@@ -20,7 +20,7 @@
             <a href="{% url 'appointments' %}" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Appointments</a>
             <a href="{% url 'labs' %}" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Labs</a>
             <a href="/patient_billing" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Billing</a>
-            <a href="/" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Message</a>
+            <a href="/messages" class="p-2 px-3 my-1 text-white rounded-[8px] hover:bg-gray-800">Message</a>
               <form action="{% url 'logout' %}" method="post" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit">Logout</button>
@@ -38,7 +38,7 @@
     <!-- Footer Section (Sticky at the Bottom) -->
     <footer class="bg-gray-900 text-white p-8 pb-2 grid md:grid-cols-3 md:gap-10 lg:gap-20 xl:gap-30 2xl:gap-40 md:px-40">
         <div class="blog-name">
-            <p class="text-xl font-bold">The Bone Zone</p>
+            <p class="text-xl font-bold">Health Portal</p>
             <p class="my-3 text-justify">About goes here</p>
         </div>
         <div class="pages">
