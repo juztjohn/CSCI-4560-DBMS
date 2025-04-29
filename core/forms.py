@@ -2,6 +2,25 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Patient, Appointment, Message
+from datetime import date, timedelta, datetime
+
+FACILITIES = [
+    ('Murfreesboro Clinic', 'Murfreesboro Clinic'),
+    ('Smyrna Clinic', 'Smyrna Clinic'),
+]
+
+TIMES = [
+    ('09:00', '09:00 AM'),
+    ('09:30', '09:30 AM'),
+    ('10:00', '10:00 AM'),
+    ('10:30', '10:30 AM'),
+    ('11:00', '11:00 AM'),
+    ('11:30', '11:30 AM'),
+    ('14:00', '02:00 PM'),
+    ('14:30', '02:30 PM'),
+    ('15:00', '03:00 PM'),
+    ('15:30', '03:30 PM'),
+]
 
 class PatientSignUpForm(UserCreationForm):
     phone = forms.CharField(max_length=20, required=True)
@@ -22,12 +41,39 @@ class PatientSignUpForm(UserCreationForm):
         return user
 
 class AppointmentForm(forms.ModelForm):
+    facility = forms.ChoiceField(choices=FACILITIES)
+    appointment_type = forms.CharField(label='Reason for appointment', max_length=50)
+    date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        help_text='Select a date (up to 3 months out)'
+    )
+    time = forms.ChoiceField(choices=TIMES, help_text='Select a time slot')
+    notes = forms.CharField(widget=forms.Textarea, required=False)
+
     class Meta:
         model = Appointment
-        fields = ['facility', 'doctor', 'appointment_type', 'date_time', 'notes']
-        widgets = {
-            'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline'}),
-        }
+        # we exclude patient (auto‑set in the view) and date_time (we build it ourselves)
+        exclude = ['patient', 'date_time']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        today = date.today()
+        max_date = today + timedelta(days=90)
+        # enforce the 3‑month limit in the widget
+        self.fields['date'].widget.attrs['min'] = today.isoformat()
+        self.fields['date'].widget.attrs['max'] = max_date.isoformat()
+
+    def save(self, commit=True, patient=None):
+        # Build the Appointment instance without writing to DB yet
+        appt = super().save(commit=False)
+        # combine date + time into the model’s date_time
+        dt = f"{self.cleaned_data['date']} {self.cleaned_data['time']}"
+        appt.date_time = datetime.strptime(dt, '%Y-%m-%d %H:%M')
+        if patient:
+            appt.patient = patient
+        if commit:
+            appt.save()
+        return appt
 
 class PatientUpdateForm(forms.ModelForm):
     # These fields are from the User model

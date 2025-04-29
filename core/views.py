@@ -1,9 +1,8 @@
-# core/views.py
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models import Max
 from .models import Patient, Doctor, Appointment, Lab, Billing, Message
 from .forms import PatientSignUpForm, AppointmentForm, PatientUpdateForm, PatientMessageForm, DoctorMessageForm
 
@@ -15,9 +14,7 @@ def appointments(request):
     try:
         patient = request.user.patient
     except Patient.DoesNotExist:
-        messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_signup')
-    # Retrieve appointments for the patient
+        return redirect('registration/patient_signup')
     appts = Appointment.objects.filter(patient=patient)
     return render(request, 'appointments/appointments.html', {'appointments': appts})
 
@@ -29,7 +26,7 @@ def patient_signup(request):
             return redirect('login')
     else:
         form = PatientSignUpForm()
-    return render(request, 'patient_signup.html', {'form': form})
+    return render(request, 'registration/patient_signup.html', {'form': form})
 
 @login_required
 def dashboard(request):
@@ -61,17 +58,44 @@ def doctor_appointments(request):
     return render(request, 'doctor/doctor_appointments.html', {'appointments': appts})
 
 @login_required
+def doctor_patient_list(request):
+    doctor = request.user.doctor
+    # get distinct patients with latest appointment date
+    patients = (
+        Patient.objects
+        .filter(appointment__doctor=doctor)
+        .annotate(last_appointment=Max('appointment__date_time'))
+        .order_by('-last_appointment')
+    )
+    return render(request, 'doctor/patients/doctor_patient_list.html', {'patients': patients})
+
+@login_required
+def patient_details(request, pk):
+    # only doctors should hit this; you can check request.user.doctor here if needed
+    patient = get_object_or_404(Patient, pk=pk)
+    # example related data
+    appointments = Appointment.objects.filter(patient=patient).order_by('-date_time')
+    labs         = Lab.objects.filter(patient=patient).order_by('-date')
+    bills        = Billing.objects.filter(patient=patient).order_by('-created_at')
+    return render(request, 'doctor/patient_details.html', {
+        'patient': patient,
+        'appointments': appointments,
+        'labs': labs,
+        'bills': bills,
+    })
+
+@login_required
 def create_appointment(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            appointment = form.save(commit=False)
-            appointment.patient = request.user.patient
-            appointment.save()
+            # pass the patient in so form.save() can set it
+            form.save(patient=request.user.patient)
             return redirect('appointments')
     else:
         form = AppointmentForm()
     return render(request, 'appointments/create_appointment.html', {'form': form})
+
 
 @login_required 
 def patient_billing(request):
@@ -79,24 +103,19 @@ def patient_billing(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_signup')
+        return redirect('registration/patient_signup')
     bills = Billing.objects.filter(patient=patient)
-    return render(request, 'patient_billing.html', {'bills': bills})
+    return render(request, 'billing/patient_billing.html', {'bills': bills})
 
 @login_required 
-def pay_bill(request):
+def pay_bill(request, bill_id):
+    bill = get_object_or_404(Billing,
+                             id=bill_id,
+                             patient=request.user.patient)
     if request.method == 'POST':
-        bill_id = request.POST.get('selected_bill')
-    
-        if bill_id:
-            try:
-                bill = get_object_or_404(Billing, id=bill_id)
-                return render(request, 'pay_bill.html', {"bill": bill})
-            except (ValueError, TypeError):
-                pass # ignore button
-
-    # If no bill was selected or method isn't POST
-    return render(request, 'patient_billing.html')
+        bill.delete()  
+        messages.success(request, "Bill paid and removed.")
+        return redirect('patient_billing')
 
 @login_required
 def labs(request):
@@ -104,11 +123,10 @@ def labs(request):
         patient = request.user.patient
     except Patient.DoesNotExist:
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
-        return redirect('patient_signup')
+        return redirect('registration/patient_signup')
 
-    # Retrieve labs for the patient
     patient_labs = Lab.objects.filter(patient=patient)
-    return render(request, 'labs.html', {'labs': patient_labs})
+    return render(request, 'labs/labs.html', {'labs': patient_labs})
 
 @login_required
 def patient_updateinfo(request):
@@ -144,11 +162,9 @@ def user_messages(request):
         messages.error(request, "You do not have a patient profile. Please complete your registration.")
         return redirect('patient_registration')
 
-    # Retrieve messages for the patient
     if hasattr(user, 'patient'):
         patient_messages = Message.objects.filter(patient=user.patient)
         return render(request, 'messages/messages.html', {'messages': patient_messages})
-    # Retrieve messages for the doctor
     elif hasattr(user, 'doctor'):
         doctor_messages = Message.objects.filter(doctor=user.doctor)
         return render(request, 'messages/messages.html', {'messages': doctor_messages})

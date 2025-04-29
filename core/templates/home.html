@@ -4,34 +4,133 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <div class="bg-cover bg-center h-screen flex items-top" style="background-image: url('{% static 'img/background.jpg' %}')">
-        <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
-            <h2 class="text-5xl mb-3 text-black">Welcome to your Health Portal</h2>
-            <p class="text-black text-2xl">
-               Your healthcare made simple
-            </p>
-            <div class="flex flex-row space-x-4 items-center justify-center mt-5">
-             {% if not user.is_authenticated %}
-                <a href="{% url 'patient_signup' %}"  class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
-                    Sign Up
-                </a>
-                <a href="{% url 'login' %}" class="text-3xl w-48 h-24 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 border border-black rounded flex items-center justify-center">
-                    Login
-                </a>
-            {% else %}
-                <a href="{% url 'create_appointment' %}" class="w-96 h-16 bg-violet-900 hover:bg-fuchsia-600 text-white font-bold text-2xl flex items-center justify-center rounded border border-black">
-                  Schedule an Appointment
-                </a>
-            {% endif %}
-            </div>
-        </div>
+  <!-- Banner -->
+  <section class="relative w-full h-64 md:h-80 lg:h-96">
+    <img src="{% static 'img/health-clinic.jpg' %}"
+         alt="Health portal banner"
+         class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+        Welcome to your Health Portal
+      </h2>
+      <p class="mt-2 text-lg md:text-2xl text-white">
+        Your healthcare made simple
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4 justify-center">
+        {% if not user.is_authenticated %}
+          <a href="{% url 'patient_signup' %}"
+              class="text-xl md:text-2xl bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded  
+          shadow-lg hover:shadow-2xl border-2 border-sky-900 transition-shadow duration-200">
+                Sign Up
+          </a>
+          <a href="{% url 'login' %}"
+                class="text-xl md:text-2xl bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded  
+          shadow-lg hover:shadow-2xl border-2 border-sky-900 transition-shadow duration-200">
+                Login
+          </a>
+        {% else %}
+          <a href="{% url 'dashboard' %}"
+             class="text-xl md:text-2xl bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded  
+          shadow-lg hover:shadow-2xl border-2 border-sky-900 transition-shadow duration-200">
+                Go to Dashboard
+          </a>
+        {% endif %}
+      </div>
     </div>
+  </section>
 
-<div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
-  <h2 class="text-5xl mb-3 text-black">Careers</h2>
-  <p class="text-black">Join Now</p>
-  <button class="bg-purple-900 text-white hover:bg-blue-400 font-bold py-2 px-4 mt-3 rounded">
-    Opportunities Await!
-  </button>
-</div>
-{% endblock %}
+  <!-- Info Grid -->
+  <div class="container mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-lg shadow p-6 text-center">
+        <h3 class="text-2xl font-semibold mb-2">Easy Booking</h3>
+        <p class="text-gray-600">
+          Schedule appointments with just a few clicks—anywhere, anytime.
+        </p>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-white rounded-lg shadow p-6 text-center">
+        <h3 class="text-2xl font-semibold mb-2">Secure Records</h3>
+        <p class="text-gray-600">
+          Your medical history is encrypted and accessible only to you.
+        </p>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-white rounded-lg shadow p-6 text-center">
+        <h3 class="text-2xl font-semibold mb-2">24/7 Support</h3>
+        <p class="text-gray-600">
+          Our team is here to help you—day or night, weekends included.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Reviews -->
+  <section class="bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8">What Our Clients Say</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Review Card 1 -->
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <img src="{% static 'img/img1.png' %}" alt="Client 1" class="w-20 h-20 rounded-full mx-auto mb-4">
+          <h4 class="text-xl font-semibold mb-2">Healthcare Solutions</h4>
+          <div class="flex justify-center mb-4">
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-gray-300">★</span>
+          </div>
+          <p class="text-gray-600">
+            “The scheduling is a breeze, and the support staff are incredibly helpful. Highly recommended!”
+          </p>
+        </div>
+
+        <!-- Review Card 2 -->
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <img src="{% static 'img/img2.png' %}" alt="Client 2" class="w-20 h-20 rounded-full mx-auto mb-4">
+          <h4 class="text-xl font-semibold mb-2">John Healthcare</h4>
+          <div class="flex justify-center mb-4">
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+          </div>
+          <p class="text-gray-600">
+            “Fantastic portal—viewing our records and appointments has never been easier!”
+          </p>
+        </div>
+
+        <!-- Review Card 3 -->
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <img src="{% static 'img/img1.png' %}" alt="Client 3" class="w-20 h-20 rounded-full mx-auto mb-4">
+          <h4 class="text-xl font-semibold mb-2">Mount Vernon Healthcare</h4>
+          <div class="flex justify-center mb-4">
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-yellow-400">★</span>
+            <span class="text-gray-300">★</span>
+          </div>
+          <p class="text-gray-600">
+            “Great experience! Our patients love the messaging system”
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers Section -->
+  <div class="container mx-auto py-10 px-4 text-center">
+    <h2 class="text-5xl mb-3 text-black">Careers</h2>
+    <p class="text-black mb-6">Join Now</p>
+    <button class="class=text-m md:text-m bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded  
+          shadow-lg hover:shadow-2xl border-2 border-sky-900 transition-shadow duration-200">
+      Opportunities Await!
+    </button>
+  </div>
+{% endblock content %}

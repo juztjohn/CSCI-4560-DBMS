@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Patient: {{ patient.user.get_full_name }}{% endblock title %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 flex justify-center py-10">
+  <div class="w-full max-w-4xl space-y-8">
+    <!-- Header -->
+    <header class="text-center text-3xl font-bold">
+      {{ patient.user.get_full_name }}
+    </header>
+
+    <!-- Profile Card -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">Profile Information</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <p><strong>Username:</strong> {{ patient.user.username }}</p>
+        <p><strong>Email:</strong> {{ patient.user.email }}</p>
+        <p><strong>Phone:</strong> {{ patient.phone|default:"N/A" }}</p>
+        <p><strong>Joined:</strong> {{ patient.user.date_joined|date:"M d, Y" }}</p>
+      </div>
+    </div>
+
+    <!-- Appointment History -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">Appointment History</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Facility</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Reason</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {% for appt in appointments %}
+            <tr>
+              <td class="px-4 py-2">{{ appt.date_time|date:"M d, Y" }}</td>
+              <td class="px-4 py-2">{{ appt.date_time|date:"g:i A" }}</td>
+              <td class="px-4 py-2">{{ appt.facility }}</td>
+              <td class="px-4 py-2">{{ appt.appointment_type }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="px-4 py-2 text-center text-gray-500">
+                No appointments found.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Labs -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">Lab Results</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        {% for lab in labs %}
+        <li>
+          {{ lab.date|date:"M d, Y" }} — <strong>{{ lab.test }}:</strong> {{ lab.test_result }}
+        </li>
+        {% empty %}
+        <li class="text-gray-500">No lab records available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Billing -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">Billing History</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date Issued</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {% for bill in bills %}
+            <tr>
+              <td class="px-4 py-2">{{ bill.created_at|date:"M d, Y" }}</td>
+              <td class="px-4 py-2">${{ bill.amount_due }}</td>
+              <td class="px-4 py-2">{{ bill.payment_status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="px-4 py-2 text-center text-gray-500">
+                No billing records.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Back to Patients -->
+    <div class="text-center">
+      <a href="{% url 'doctor_patient_list' %}"
+         class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded  
+                shadow-lg hover:shadow-2xl border-2 border-sky-900 transition-shadow duration-200">
+        ← Back to Patients
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
